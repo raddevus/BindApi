@@ -37,4 +37,23 @@ app.MapPost("/RegisterUser2", IResult ([FromForm] string uuid) =>   {
 .DisableAntiforgery()
 .WithOpenApi();
 
+app.MapPost("/RegisterUser3", IResult ([FromBody] string uuid) =>   {
+    return Results.Ok(new { Message = $"FORM - You sent in uuid: {uuid}" });
+})
+.WithOpenApi();
+
+app.MapPost("/RegisterUser4", IResult ([FromBody] UuidHolder uuid) =>   {
+    return Results.Ok(new { Message = $"BODY - You sent in uuid: {uuid.uuid}" });
+})
+.WithOpenApi();
+
+app.MapPost("/RegisterUser5", IResult ([FromHeader] string uuid) =>   {
+    return Results.Ok(new { Message = $"HEADER - You sent in uuid: {uuid}" });
+})
+.WithOpenApi();
+
 app.Run();
+
+record UuidHolder{
+    public string uuid{get;set;}
+}
