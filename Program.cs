@@ -46,8 +46,9 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
-app.MapPost("/RegisterUser1", ActionResult ([FromQuery] string uuid) =>   {
-    return new JsonResult(new { result = $"You sent me : {uuid}" });
+app.MapPost("/RegisterUser1", IResult ([FromQuery] string uuid) =>   {
+    // return new JsonResult(new { result = $"You sent me : {uuid}" });
+    return Results.Ok(new { Message = $"You sent in uuid: {uuid}" });
 });
 
 app.Run();
